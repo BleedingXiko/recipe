@@ -1,6 +1,6 @@
 ---
-title: 'My First recipe Post'
-description: "test"
+title: 'Steak and Eggs'
+description: "Grilled steak and fried eggs"
 ---
 
 # My First Blog Post

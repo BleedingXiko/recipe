@@ -4,5 +4,21 @@ const {frontmatter} = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
+    <article class="text-center">
     <slot />
+    </article>
 </Layout>
+
+<style> 
+  article :global(h1){
+        padding: 15px;
+        font-size: 30px;
+    }
+    article :global(h2){
+        font-size: 25px;
+    }
+    article :global(p){
+        background-color: blue;
+    }
+
+</style>
