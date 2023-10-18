@@ -6,6 +6,11 @@ const recipeCollection = defineCollection({
     schema: z.object({
       title: z.string(),
       description: z.string(),
+      image: z.object({
+        url: z.string(),
+        alt: z.string()
+      }),
+      tags: z.array(z.string())
     })
 });
 // Export a single `collections` object to register your collection(s)

@@ -128,7 +128,8 @@ input:checked + .slider .feather-sun {
 }
 </style>
 
-<script is:inline>
+<script>
+    document.addEventListener('astro:page-load', () => {
   // Get the theme toggle input
   const themeToggle = document.querySelector(
             '.theme-switch input[type="checkbox"]'
@@ -163,5 +164,5 @@ input:checked + .slider .feather-sun {
           themeToggle.addEventListener("change", switchTheme, false);
 
 
-
+        });
 </script>

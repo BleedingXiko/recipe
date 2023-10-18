@@ -3,9 +3,11 @@ interface Props {
 	title: string;
 	description: string;
 	href: string;
+	imageUrl: string;
+	imageAlt: string;
 }
 
-const { href, title, description } = Astro.props;
+const { href, title, description, imageAlt, imageUrl } = Astro.props;
 ---
 
 <li class="link-card">
@@ -14,6 +16,7 @@ const { href, title, description } = Astro.props;
 			{title}
 			<span>&rarr;</span>
 		</h2>
+		<img transition:name="hero" src={imageUrl} width="150" alt={imageAlt} />
 		<p>
 			{description}
 		</p>

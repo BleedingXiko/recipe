@@ -1,6 +1,10 @@
 ---
 title: 'Chocolate Chip Cookies'
 description: "Learn how to make the perfect chocolate chip cookies."
+image:
+  url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1696801436/Project-11/12_cf5uie.png"
+  alt: "The Astro logo with the word One."
+tags: ["dessert", "cookies"]
 ---
 
 # Delicious Chocolate Chip Cookies

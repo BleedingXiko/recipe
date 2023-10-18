@@ -4,7 +4,8 @@ const {frontmatter} = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-    <article class="text-center">
+    <article class="text-center flex flex-col">
+         <img class=" self-center" transition:name="hero" src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
     <slot />
     </article>
 </Layout>
@@ -26,8 +27,9 @@ const {frontmatter} = Astro.props;
         list-style: none; /* Remove default list styles */
   counter-reset: item; /* Reset the counter for list items */
         border: 3px solid var(--primary);
-        margin: 15px;
+        margin: auto;
         margin-bottom: 50px;
+        width: 60%;
     }
     article :global(ol li){
         padding: 10px;
@@ -49,8 +51,8 @@ const {frontmatter} = Astro.props;
     }
     article :global(ul li){
         padding: 4px;
-        align-self: flex-start;
-        text-align: flex-start;
+        align-self: start;
+        text-align: start;
     }
     article :global(ul li)::before{
         content: "\2022";

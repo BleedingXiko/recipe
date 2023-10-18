@@ -1,6 +1,10 @@
 ---
 title: 'Steak and Eggs'
 description: "A quick and easy dinner option for steak and eggs lovers."
+image:
+  url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1696702230/Project-11/p3_hs5bdc.png"
+  alt: "The Astro logo with the word One."
+tags: ["steak", "eggs", "dinner"]
 ---
 
 # Steak and Eggs
