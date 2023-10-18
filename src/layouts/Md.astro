@@ -6,9 +6,34 @@ const {frontmatter} = Astro.props;
 <Layout title={frontmatter.title}>
     <article class="text-center flex flex-col">
          <img class=" self-center" transition:name={`hero${frontmatter.slug}`} src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+         <button id="saveButton"> save to favorites</button>
     <slot />
     </article>
 </Layout>
+
+<script>
+    
+    document.addEventListener('astro:page-load', function() {
+        const saveButton = document.getElementById("saveButton");
+        let pathname = window.location.pathname;
+        let currentPath = pathname.slice(0);
+        let favs = [];
+
+        if(localStorage.getItem("favs") !== undefined){
+            favs.push(localStorage.getItem("favs"))
+        }
+
+        // Add a click event listener to the button
+        saveButton.addEventListener("click", function() {
+            // Get the input value
+            
+
+                favs.push(currentPath.toString())
+                localStorage.setItem("favs", JSON.stringify(favs));
+            
+        });
+    });
+</script>
 
 <style> 
   article :global(h1){
