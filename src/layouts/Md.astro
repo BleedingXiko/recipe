@@ -5,7 +5,7 @@ const {frontmatter} = Astro.props;
 
 <Layout title={frontmatter.title}>
     <article class="text-center flex flex-col">
-         <img class=" self-center" transition:name="hero" src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+         <img class=" self-center" transition:name={`hero${frontmatter.slug}`} src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
     <slot />
     </article>
 </Layout>

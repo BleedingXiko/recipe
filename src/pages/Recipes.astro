@@ -10,7 +10,7 @@ const allPosts = await getCollection('recipes')
 	  <ul>
 		{
 		  allPosts.map((post) => (
-		  <Card href={`/recipes/${post.slug}/`} title={post.data.title} description={post.data.description} imageUrl={post.data.image.url} imageAlt={post.data.image.alt}/>)
+		  <Card slug={post.slug} href={`/recipes/${post.slug}/`} title={post.data.title} description={post.data.description} imageUrl={post.data.image.url} imageAlt={post.data.image.alt}/>)
 		  )
 		}
 	  </ul>
