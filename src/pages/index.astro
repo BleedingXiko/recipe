@@ -1,14 +1,19 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+const allPosts = await getCollection('recipes')
 ---
 
 <Layout title="Welcome to Astro.">
 	  <h1>Welcome to Astro.</h1>
-	  <Card href='/' title='test' body="l;akdjf alfdjdlakfj alkdfjdkfjalkdfjldkjf " />
-	  <Card href='/' title='test' body="l;akdjf alfdjdlakfj alkdfjdkfjalkdfjldkjf " />
-	  <Card href='/' title='test' body="l;akdjf alfdjdlakfj alkdfjdkfjalkdfjldkjf " />
-	  <Card href='/' title='test' body="l;akdjf alfdjdlakfj alkdfjdkfjalkdfjldkjf " />
+	  <ul>
+		{
+		  allPosts.map((post) => (
+		  <Card href={`/recipes/${post.slug}/`} title={post.data.title} description={post.data.description} />)
+		  )
+		}
+	  </ul>
 </Layout>
 
 <style>
