@@ -1,0 +1,43 @@
+<button id="theme-toggle">Toggle Theme</button>
+
+<script is:inline>
+var htmlElement = document.querySelector("html");
+
+// Function to get the theme preference
+function getTheme() {
+  if (localStorage.getItem('theme')) {
+    return localStorage.getItem('theme');
+  }
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  return 'light';
+}
+
+// Get the theme from localStorage
+var theme = getTheme();
+
+// Set the theme in local storage if not already set
+if (!localStorage.getItem('theme')) {
+  localStorage.setItem('theme', theme);
+}
+
+// Update the HTML element with the current theme
+htmlElement.setAttribute("data-theme", theme);
+console.log(theme);
+
+// Get the theme toggle button
+var themeToggle = document.getElementById("theme-toggle");
+
+// Add a click event listener to the button
+themeToggle.addEventListener("click", function() {
+  // Check the current theme and toggle it
+  theme = theme === 'dark' ? 'light' : 'dark';
+
+  htmlElement.setAttribute("data-theme", theme);
+  localStorage.setItem('theme', theme);
+  console.log(theme);
+});
+
+
+</script>

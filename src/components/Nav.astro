@@ -1,0 +1,55 @@
+---
+import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+
+let pathname = new URL(Astro.request.url).pathname;
+let currentPath = pathname.slice(1);
+currentPath = currentPath.replace("/", "");
+
+---
+
+<header class="md:flex p-5 gap-5">
+  <Astronav closeOnClick>
+    <div class="m-auto text-2xl flex w-full justify-between md:text-4xl">
+      <a class={currentPath === "" ? "active-home" : "/"} href="/"
+        >Nicholas Rosdahl</a
+      >
+      <div class="block md:hidden">
+        <MenuIcon class="w-12 h-12 text-white-100" />
+      </div>
+    </div>
+    <MenuItems class="hidden md:flex md:pt-12">
+      <ul
+        class="flex flex-col gap-4 justify-around md:flex-row md:gap-24 md:mx-48 md:text-2xl"
+      >
+      <li class="ml-auto">
+        <a class={currentPath === "About" ? "active" : ""} href="/About">About</a>
+      </li>
+      <li class="ml-auto">
+        <a class={currentPath === "About" ? "active" : ""} href="/About">About</a>
+      </li>
+      </ul>
+    </MenuItems>
+  </Astronav>
+</header>
+
+
+<style>
+  header {
+    background-color: var(--secondary);
+    color: var(--text);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .active {
+    color: var(--text);
+  }
+
+  .active-home {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--accent);
+  }
+</style>
