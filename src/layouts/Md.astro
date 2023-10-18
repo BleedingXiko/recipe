@@ -36,6 +36,7 @@ const {frontmatter} = Astro.props;
         content: counter(item); /* Use the counter value for list markers */
     counter-increment: item; /* Increment the counter value */
     color: var(--accent);
+    
     }
     article :global(ul){
         border: 3px solid var(--primary);
@@ -48,15 +49,15 @@ const {frontmatter} = Astro.props;
     }
     article :global(ul li){
         padding: 4px;
-        align-self: start;
-        text-align: start;
+        align-self: flex-start;
+        text-align: flex-start;
     }
     article :global(ul li)::before{
         content: "\2022";
         color: var(--accent);
         padding: 4px;
-        align-self: start;
-        text-align: start;
+        align-self: flex-start;
+        text-align: flex-start;
     }
 
 </style>
