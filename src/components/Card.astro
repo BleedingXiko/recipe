@@ -17,7 +17,7 @@ const { href, title, description, imageAlt, imageUrl, slug } = Astro.props;
 			{title}
 			<span>&rarr;</span>
 		</h2>
-		<img class="img" transition:name={`hero${slug}`} src={imageUrl} width="300" alt={imageAlt} />
+		<img class="img" transition:name={`hero${slug}`} src={imageUrl} width="300" height="300" alt={imageAlt} />
 		<p>
 			{description}
 		</p>
@@ -70,5 +70,10 @@ const { href, title, description, imageAlt, imageUrl, slug } = Astro.props;
   display: block;
   margin: 0 auto;
   padding: 10px;
+}
+@media screen and (max-width: 760px) {
+  .link-card{
+	width: 60%;
+  }
 }
 </style>

@@ -23,7 +23,7 @@ const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 <Layout title={tag}>
-  <p>Posts tagged with {tag}</p>
+  <h1>Posts tagged with {tag}</h1>
   <ul>
     {
       posts.map((post) => (
@@ -32,3 +32,11 @@ const { posts } = Astro.props;
     }
   </ul>
 </Layout>
+
+<style>
+    h1{
+  text-align: center;
+  font-size: 2rem;
+  padding-bottom: 20px;
+}
+</style>
