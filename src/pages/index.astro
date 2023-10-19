@@ -7,24 +7,19 @@ const allPosts = await getCollection('recipes')
 
 <Layout title="Welcome to Astro.">
 	  <main>
-        <section>
-            <h1>Welcome to Delicious Recipes</h1>
-            <p>Discover a world of culinary delights with our recipe app.</p>
+        <section class="start">
+            <h1>Welcome to My Kitchen</h1>
+            <p>Discover a world of culinary delights with our recipe website.</p>
         </section>
 
         <section>
             <h2>Explore Diverse Cuisines</h2>
-            <p>From Italian pasta to Japanese sushi, our app features a wide range of international recipes to satisfy your taste buds.</p>
+            <p>From Italian pasta to Japanese sushi, my site features a wide range of international recipes to satisfy your taste buds.</p>
         </section>
 
-        <section>
+        <section class="end">
             <h2>Cook Like a Pro</h2>
             <p>Step-by-step instructions, ingredient lists, and cooking tips make it easy for you to create restaurant-quality dishes at home.</p>
-        </section>
-
-        <section>
-            <h2>Save Your Favorites</h2>
-            <p>Bookmark your favorite recipes to access them quickly whenever you want to cook a delicious meal.</p>
         </section>
     </main>
 </Layout>
@@ -34,6 +29,13 @@ const allPosts = await getCollection('recipes')
 		text-align: center;
 	}
 	section{
-		margin: 40px;
+		margin: 20px;
 	}
+    .start{
+        margin-top: 0;
+    }
+
+    .end{
+        margin-bottom: 40px;
+    }
 </style>

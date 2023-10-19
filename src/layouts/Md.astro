@@ -6,34 +6,40 @@ const {frontmatter} = Astro.props;
 <Layout title={frontmatter.title}>
     <article class="text-center flex flex-col">
          <img class=" self-center" transition:name={`hero${frontmatter.slug}`} src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-         <button id="saveButton"> save to favorites</button>
+    {/*
+        <button id="saveButton"> save to favorites</button>
+    */}
     <slot />
     </article>
 </Layout>
 
+{/*
 <script>
     
     document.addEventListener('astro:page-load', function() {
-        const saveButton = document.getElementById("saveButton");
-        let pathname = window.location.pathname;
-        let currentPath = pathname.slice(0);
-        let favs = [];
+    const saveButton = document.getElementById("saveButton");
+    let pathname = window.location.pathname;
+    let currentPath = pathname.slice(0);
+    currentPath = currentPath.replace("/recipes/", "");
+    let favs = [];
 
-        if(localStorage.getItem("favs") !== undefined){
-            favs.push(localStorage.getItem("favs"))
-        }
+    if (localStorage.getItem("favs") !== undefined) {
+        // Parse the stored JSON string back into an array
+        favs = JSON.parse(localStorage.getItem("favs"));
+    }
 
-        // Add a click event listener to the button
-        saveButton.addEventListener("click", function() {
-            // Get the input value
-            
+    // Add a click event listener to the button
+    saveButton.addEventListener("click", function() {
 
-                favs.push(currentPath.toString())
-                localStorage.setItem("favs", JSON.stringify(favs));
-            
-        });
+
+        favs.push(currentPath);
+        localStorage.setItem("favs", JSON.stringify(favs));
     });
+});
+
 </script>
+
+*/}
 
 <style> 
   article :global(h1){

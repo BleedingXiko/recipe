@@ -47,7 +47,7 @@
 <style> 
 .theme-switch-wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   margin: auto;
   padding: 10px;
@@ -129,7 +129,7 @@ input:checked + .slider .feather-sun {
 </style>
 
 <script>
-    document.addEventListener('astro:page-load', () => {
+    document.addEventListener('astro:after-swap', () => {
   // Get the theme toggle input
   const themeToggle = document.querySelector(
             '.theme-switch input[type="checkbox"]'
@@ -137,6 +137,7 @@ input:checked + .slider .feather-sun {
 
           // Get the current theme from local storage
           const currentTheme = localStorage.getItem("theme");
+          
 
           // If the current local storage item can be found
           if (currentTheme) {
@@ -144,9 +145,8 @@ input:checked + .slider .feather-sun {
             document.documentElement.setAttribute("data-theme", currentTheme);
 
             // If the current theme is dark, check the theme toggle
-            if (currentTheme === "dark") {
-              themeToggle.checked = true;
-            }
+            themeToggle.checked = currentTheme === "dark";
+
           }
 
           // Function that will switch the theme based on the if the theme toggle is checked or not
