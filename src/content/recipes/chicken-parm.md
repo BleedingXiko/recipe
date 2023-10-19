@@ -4,7 +4,7 @@ description: "Delicious chicken cutlets with crispy coating, topped with cheese,
 image:
   url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1697739471/recipe-site/chicenparm_ql2gu2.jpg"
   alt: "Chicken Parmesan"
-tags: ["dinner", "Italian"]
+tags: ["dinner", "Italian", "chicken"]
 ---
 
 # Chicken Parmesan
