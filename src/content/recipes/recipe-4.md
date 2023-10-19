@@ -40,5 +40,3 @@ tags: ["fish", "dinner"]
 8. Garnish with fresh parsley before serving.
 
 9. Enjoy your baked lemon garlic salmon with your favorite side dishes!
-
-Feel free to replace the image URL with an actual image of the dish. If you have more recipes to add or need any adjustments, please let me know!
