@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Md from '../../layouts/Md.astro';
+import Notes from '../../components/Notes.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('recipes');
@@ -14,4 +15,5 @@ const { Content } = await entry.render();
 ---
 <Md frontmatter={entry.data}>
   <Content />
+  <Notes recipe={entry.slug}/>
 </Md>

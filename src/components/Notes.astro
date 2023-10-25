@@ -1,0 +1,30 @@
+---
+import { supabase } from '../utils/supabase';
+
+const { recipe } = Astro.props;
+let recipeData = "";
+
+const fetchRecipeData = async () => {
+    
+    let { data, error } = await supabase
+  .from('user-notes')
+  .select('recipe-notes');
+
+  if (error) {
+    console.error('Error fetching notes:', error);
+  } else {
+    recipeData = data;
+  }
+};
+
+// Call the fetchRecipeData function to retrieve the notes and recipe when the component loads
+fetchRecipeData();
+
+---
+
+
+<div>
+    <h2>Notes</h2>
+        
+    <p class="mb-20">{recipeData}</p>
+  </div>
