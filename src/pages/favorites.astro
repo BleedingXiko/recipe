@@ -1,19 +1,18 @@
 ---
-import { getCollection } from "astro:content";
-import { getEntryBySlug } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import { supabase } from '$src/utils/supabase';
 
-let favs = ["recipe-1", "recipe-2", "recipe-3" ]
-const all = await getCollection("recipes")
-const specificRec = await getEntryBySlug('recipes', "recipe-1");
+const favs = [];
 
-let entries = [];
-
-all.map((e) => {
-    entries.push(e);
-})
-
+const fetchRecipes = async () => {
+    const { data, error } = await supabase.from('favorites').select();
+    if (error) {
+      console.error('Error fetching recipes:', error);
+    } else {
+      favs.push(data)
+    }
+  };
 
 ---
 
