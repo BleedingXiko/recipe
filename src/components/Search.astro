@@ -53,7 +53,7 @@
 
     .container :global(h3) {
         margin: 0;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 
     .container :global(p) {
@@ -64,6 +64,10 @@
 
     .container :global(.line) {
       margin-bottom: 15px;
+    }
+
+    .container :global(mark){
+      background-color: var(--accent)
     }
 </style>
 
@@ -92,7 +96,7 @@
       <h3>${data.meta.title}</h3>
       <p>${data.excerpt}</p>
       <svg class="line" xmlns="http://www.w3.org/2000/svg" width="100%" height="5" viewBox="0 0 100 5">
-        <line x1="-200" y1="3" x2="500" y2="-6" stroke="var(--accent)" stroke-width="5" />
+        <line x1="-200" y1="3" x2="500" y2="-6" stroke="var(--secondary)" stroke-width="5" />
       </svg>
     </a>
   `
