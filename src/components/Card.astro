@@ -10,70 +10,94 @@ interface Props {
 
 const { href, title, description, imageAlt, imageUrl, slug } = Astro.props;
 ---
-
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<img class="img" transition:name={`hero${slug}`} src={imageUrl} width="300" height="300" alt={imageAlt} />
-		<p>
-			{description}
-		</p>
-	</a>
-</li>
+<div class="card-grid">
+    <div class="custom-card">
+        <a href={href} class="card-link">
+            <div class="card-content">
+                <div class="card-image">
+                    <img src={imageUrl} alt={imageAlt} />
+                </div>
+                <div class="card-details">
+                    <h2>{title}</h2>
+                    <p>{description}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 <style>
-	.link-card {
-		list-style: none;
-		display: flex;
-		justify-content: center;
-		align-self: center;
-		text-align: center;
-		margin: auto;
-		margin-bottom: 30px;
-		padding: 1px;
-		background-color: var(--secondary);
-		background-image: none;
-		background-size: 400%;
-		border-radius: 7px;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-		width: 40%;
-	}
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: calc(1.5rem - 1px);
-		border-radius: 8px;
-		color: var(--text);
-		background-color: var(--primary);
-		opacity: 0.8;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
+    .card-grid {
+        display: flex;
+        justify-content: center; /* Center the cards horizontally */
+        align-items: center; /* Center the cards vertically */
+        flex-wrap: wrap; /* Allow cards to wrap to the next row */
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .custom-card {
+        list-style: none;
+        background-color: var(--secondary);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 80%; /* Set the width of each card */
+        margin: 10px; /* Add some margin between cards */
+		transition: transform 0.3s ease;
+    }
+	@media (max-width: 760px){
+		.custom-card{
+			width: 60%;
+		}
 	}
 
-	.link-card:is(:hover, :focus-within) h2 {
-		color: var(--secondary);
-	}
+    .custom-card:hover {
+        transform: scale(1.05);
+    }
 
-	.img {
-  display: block;
-  margin: 0 auto;
-  padding: 10px;
-}
-@media screen and (max-width: 760px) {
-  .link-card{
-	width: 60%;
-  }
-}
+    .card-link {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--primary);
+        border-radius: 8px;
+        height: 100%;
+    }
+
+    .card-image img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .card-details {
+        padding: 16px;
+        text-align: center;
+    }
+
+    .card-details h2 {
+        margin: 0;
+        font-size: 1.25rem;
+        color: var(--text);
+    }
+
+    .card-details p {
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+        color: var(--text);
+    }
+
+    a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+    }
 </style>

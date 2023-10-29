@@ -21,6 +21,10 @@ const pageTitle = "Tag Index";
   a {
     color: var(--text);
   }
+  .tag:hover {
+    transform: scale(1.08);
+}
+
 
   .tags {
     display: flex;
@@ -28,6 +32,7 @@ const pageTitle = "Tag Index";
     margin: 0 auto;
     justify-content: center;
     align-self: center;
+    
   }
 
   .tag {
@@ -37,5 +42,6 @@ const pageTitle = "Tag Index";
     padding: 0.5em 1em;
     font-size: 1.15em;
     background-color: var(--primary);
+    transition: transform 0.3s ease; /* Specify the duration and timing function (e.g., ease) */
   }
 </style>
