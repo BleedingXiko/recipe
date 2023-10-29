@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 interface Props {
 	title: string;
 	description: string;
@@ -15,7 +16,7 @@ const { href, title, description, imageAlt, imageUrl, slug } = Astro.props;
         <a href={href} class="card-link">
             <div class="card-content">
                 <div class="card-image">
-                    <img src={imageUrl} alt={imageAlt} transition:name={`hero${slug}`}/>
+                    <Image height="50" width="50" src={imageUrl} alt={imageAlt} transition:name={`hero${slug}`}/>
                 </div>
                 <div class="card-details">
                     <h2>{title}</h2>

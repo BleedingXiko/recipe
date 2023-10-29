@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Card from "../../components/Card.astro";
+import Scroll from '../../components/ScrollTop.astro';
+
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -31,5 +33,7 @@ const { posts } = Astro.props;
       )
     }
   </ul>
+  <Scroll />
+  
 </Layout>
 
