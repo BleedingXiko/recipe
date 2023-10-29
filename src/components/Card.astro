@@ -25,7 +25,84 @@ const { href, title, description, imageAlt, imageUrl, slug } = Astro.props;
         </a>
     </div>
 </div>
+
+
+<script>
+        const cards = document.querySelectorAll('.custom-card');
+
+const options = {
+    threshold: 1, // When  100% of the card is visible
+};
+
+let scaledCard = null;
+
+const observer = new IntersectionObserver((entries) => {
+    let closestEntry = null;
+
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            if (!closestEntry || Math.abs(0.5 - entry.intersectionRatio) < Math.abs(0.5 - closestEntry.intersectionRatio)) {
+                closestEntry = entry;
+            }
+        }
+    });
+
+    if (closestEntry) {
+        if (scaledCard) {
+            scaledCard.classList.remove('scaled');
+        }
+        closestEntry.target.classList.add('scaled');
+        scaledCard = closestEntry.target;
+    }
+}, options);
+
+cards.forEach((card) => {
+    observer.observe(card);
+});
+      document.addEventListener('astro:after-swap', () => {
+
+    const cards = document.querySelectorAll('.custom-card');
+
+    const options = {
+        threshold: 1, // When  100% of the card is visible
+    };
+
+    let scaledCard = null;
+
+    const observer = new IntersectionObserver((entries) => {
+        let closestEntry = null;
+
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                if (!closestEntry || Math.abs(0.5 - entry.intersectionRatio) < Math.abs(0.5 - closestEntry.intersectionRatio)) {
+                    closestEntry = entry;
+                }
+            }
+        });
+
+        if (closestEntry) {
+            if (scaledCard) {
+                scaledCard.classList.remove('scaled');
+            }
+            closestEntry.target.classList.add('scaled');
+            scaledCard = closestEntry.target;
+        }
+    }, options);
+
+    cards.forEach((card) => {
+        observer.observe(card);
+    });
+
+      });
+</script>
+
+
+
+
 <style>
+        .scaled {
+        transform: scale(1.05);
+    }
     .card-grid {
         display: flex;
         justify-content: center; /* Center the cards horizontally */
@@ -33,6 +110,7 @@ const { href, title, description, imageAlt, imageUrl, slug } = Astro.props;
         flex-wrap: wrap; /* Allow cards to wrap to the next row */
         max-width: 1000px;
         margin: 0 auto;
+        margin-bottom: 15px;
     }
 
     .custom-card {
