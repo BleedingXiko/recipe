@@ -1,12 +1,22 @@
+
+<div class="container"> 
 <input id="search" type="text" placeholder="Search...">
 
 <div id="results" />
+</div>
 
 <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     /* Style for the search input */
     #search {
-        width: 100%;
+        width: 80%;
         padding: 10px;
+        color: black;
         border: 1px solid var(--primary); /* Use your --primary variable */
         border-radius: 5px;
         font-size: 16px;
@@ -15,6 +25,7 @@
 
     /* Style for the results container */
     #results {
+        width: 80%;
         margin-top: 10px;
         padding: 10px;
         border: 1px solid var(--primary); /* Use your --primary variable or another theme variable */
