@@ -6,7 +6,7 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 const pageTitle = "Tag Index";
 ---
 <Layout title={pageTitle}>
-  <h1>Search by Tags</h1>
+  <h1 data-pagefind-ignore>Search by Tags</h1>
   <div class="tags">
     {
       tags.map((tag) => (
