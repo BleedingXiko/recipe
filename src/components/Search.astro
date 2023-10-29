@@ -30,37 +30,73 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 80%;
+        align-items: center;
+        width: auto;
         margin-top: 10px;
         padding: 10px;
         border: 1px solid var(--primary); 
         border-radius: 5px;
         background-color: var(--background); 
+        transition: transform 0.3s ease;
     }
 
     /* Style for individual results */
-    .result {
-        padding: 10px;
+    .container :global(.result) {
         margin-bottom: 15px;
-        border-radius: 5px;
         text-decoration: none;
         color: var(--text); /* Set text color to match your theme */
     }
+    .container :global(.result):hover {
+    transform: scale(1.05);
+}
 
-    .result h3 {
+
+    .container :global(h3) {
         margin: 0;
         font-size: 1.2rem;
     }
 
-    .result p {
+    .container :global(p) {
         margin: 0;
         font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .container :global(.line) {
+      margin-bottom: 15px;
     }
 </style>
 
 
 
 <script is:inline>
+        document.querySelector('#results').innerHTML += `
+    <a class="result" href="">
+      <h3>test</h3>
+      <p>adfdfdafdfasdfdsfasdf</p>
+      <svg class="line" xmlns="http://www.w3.org/2000/svg" width="100%" height="5" viewBox="0 0 100 5">
+        <line x1="-200" y1="3" x2="500" y2="-6" stroke="var(--accent)" stroke-width="5" />
+      </svg>
+    </a>
+  `
+  document.querySelector('#results').innerHTML += `
+    <a class="result" href="">
+      <h3>test</h3>
+      <p>adfdfdafdfasdfdsfasdf</p>
+      <svg class="line" xmlns="http://www.w3.org/2000/svg" width="100%" height="5" viewBox="0 0 100 5">
+        <line x1="-200" y1="0" x2="500" y2="-2" stroke="var(--accent)" stroke-width="5" />
+      </svg>
+    </a>
+  `
+  document.querySelector('#results').innerHTML += `
+    <a class="result" href="">
+      <h3>test</h3>
+      <p>adfdfdafdfasdfdsfasdf</p>
+      <svg class="line" xmlns="http://www.w3.org/2000/svg" width="100%" height="5" viewBox="0 0 100 5">
+        <line x1="-200" y1="0" x2="500" y2="-2" stroke="var(--accent)" stroke-width="5" />
+      </svg>
+    </a>
+  `
   document.querySelector('#search')?.addEventListener('input', async (e) => {
     // only load the pagefind script once
     if (e.target.dataset.loaded !== 'true') {
@@ -79,10 +115,14 @@
     for (const result of search.results) {
       const data = await result.data()
       document.querySelector('#results').innerHTML += `
-        <a class="result" href="${data.url}">
-          <h3>${data.meta.title}</h3>
-          <p>${data.excerpt}</p>
-        </a>`
+    <a class="result" href="${data.url}">
+      <h3>${data.meta.title}</h3>
+      <p>${data.excerpt}</p>
+      <svg class="line" xmlns="http://www.w3.org/2000/svg" width="100%" height="5" viewBox="0 0 100 5">
+        <line x1="0" y1="0" x2="100" y2="0" stroke="var(--accent)" stroke-width="5" />
+      </svg>
+    </a>
+  `
     }
   })
 </script>
