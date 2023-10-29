@@ -12,6 +12,7 @@
     "postbuild": "pagefind --site dist"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.0.2",
     "@astrojs/tailwind": "^5.0.2",
     "astro": "^3.3.2",
     "astro-navbar": "^2.2.1",
