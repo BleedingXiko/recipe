@@ -1,0 +1,52 @@
+<input id="search" type="text" placeholder="Search...">
+
+<div id="results" />
+
+<style>
+    /* Style for the search input */
+    #search {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--primary); /* Use your --primary variable */
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    /* Style for the results container */
+    #results {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid var(--primary); /* Use your --primary variable or another theme variable */
+        border-radius: 5px;
+        background-color: var(--background); /* Use your --background variable or another theme variable */
+    }
+</style>
+
+
+<script is:inline>
+  document.querySelector('#search')?.addEventListener('input', async (e) => {
+    // only load the pagefind script once
+    if (e.target.dataset.loaded !== 'true') {
+      e.target.dataset.loaded = 'true'
+      // load the pagefind script
+      window.pagefind = await import("/pagefind/pagefind.js");
+    }
+
+    // search the index using the input value
+    const search = await window.pagefind.search(e.target.value)
+
+    // clear the old results
+    document.querySelector('#results').innerHTML = ''
+
+    // add the new results
+    for (const result of search.results) {
+      const data = await result.data()
+      document.querySelector('#results').innerHTML += `
+        <a href="${data.url}">
+          <h3>${data.meta.title}</h3>
+          <p>${data.excerpt}</p>
+        </a>`
+    }
+  })
+</script>

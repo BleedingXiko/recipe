@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Search from "../components/Search.astro";
 const allPosts = await getCollection('recipes')
 ---
 
@@ -11,6 +12,8 @@ const allPosts = await getCollection('recipes')
             <h1>Welcome to My Kitchen</h1>
             <p>Discover a world of culinary delights with our recipe website.</p>
         </section>
+
+        <Search />
 
         <section>
             <h2>Explore Diverse Cuisines</h2>
