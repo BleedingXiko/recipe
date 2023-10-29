@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-const allPosts = await getCollection('recipes')
+const allPosts = await getCollection('recipes');
 ---
 
 <Layout title="All Recipes">
@@ -10,8 +10,73 @@ const allPosts = await getCollection('recipes')
 	  <ul>
 		{
 		  allPosts.map((post) => (
-		  <Card slug={post.slug} href={`/recipes/${post.slug}/`} title={post.data.title} description={post.data.description} imageUrl={post.data.image.url} imageAlt={post.data.image.alt}/>)
+			<li>
+		  <Card slug={post.slug} href={`/recipes/${post.slug}/`} title={post.data.title} description={post.data.description} imageUrl={post.data.image.url} imageAlt={post.data.image.alt}/>
+		</li>)
 		  )
 		}
 	  </ul>
+	  <div id="scroll-to-top">
+		<a href="#top">↑</a>
+	  </div>
 </Layout>
+
+<script is:inline>
+	 document.addEventListener('astro:after-swap', () => {
+const scrollToTopButton = document.getElementById('scroll-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 100) {
+    scrollToTopButton.style.display = 'block';
+  } else {
+    scrollToTopButton.style.display = 'none';
+  }
+});
+
+scrollToTopButton.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+	 });
+
+
+
+	 const scrollToTopButton = document.getElementById('scroll-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 100) {
+    scrollToTopButton.style.display = 'block';
+  } else {
+    scrollToTopButton.style.display = 'none';
+  }
+});
+
+scrollToTopButton.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+</script>
+
+<style>
+#scroll-to-top {
+  position: fixed;
+  margin-bottom: 10px;
+  bottom: 25px;
+  left: 25px;
+  background-color: var(--primary);
+  color: var(--text);
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  padding: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+}
+
+#scroll-to-top a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+</style>
