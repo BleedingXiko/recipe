@@ -46,7 +46,7 @@
         text-decoration: none;
         color: var(--text); /* Set text color to match your theme */
     }
-    .container :global(.h3, .line):hover {
+    .container :global(a):hover {
     transform: scale(1.02);
 }
 
@@ -70,7 +70,6 @@
 
 
 <script is:inline>
-  
   document.querySelector('#search')?.addEventListener('input', async (e) => {
     // only load the pagefind script once
     if (e.target.dataset.loaded !== 'true') {
@@ -93,7 +92,7 @@
       <h3>${data.meta.title}</h3>
       <p>${data.excerpt}</p>
       <svg class="line" xmlns="http://www.w3.org/2000/svg" width="100%" height="5" viewBox="0 0 100 5">
-        <line x1="-200" y1="3" x2="100" y2="-6" stroke="var(--accent)" stroke-width="5" />
+        <line x1="-200" y1="3" x2="500" y2="-6" stroke="var(--accent)" stroke-width="5" />
       </svg>
     </a>
   `
