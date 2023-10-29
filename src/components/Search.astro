@@ -55,7 +55,6 @@
       const data = await result.data()
       document.querySelector('#results').innerHTML += `
         <a href="${data.url}">
-          <h3>${data.meta.title}</h3>
           <p>${data.excerpt}</p>
         </a>`
     }
