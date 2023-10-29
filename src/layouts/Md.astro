@@ -1,10 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Back from '../components/Back.astro';
+import Scroll from '../components/ScrollTop.astro';
 import { Image } from 'astro:assets';
 const {frontmatter} = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
+    <Back />
     <article class="text-center flex flex-col">
          <Image height="500" width="500" class=" self-center" transition:name={`hero${frontmatter.slug}`} src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
     {/*
@@ -12,6 +15,7 @@ const {frontmatter} = Astro.props;
     */}
     <slot />
     </article>
+    <Scroll />
 </Layout>
 
 {/*

@@ -1,0 +1,30 @@
+<button id="go-back">← Go Back</button>
+
+
+<style>
+    #go-back {
+        margin: 0 10%;
+        font-size: 20px; /* Adjust the font size as needed */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--accent); /* Use your theme color */
+    text-decoration: underline;
+    }
+
+</style>
+  
+<script >
+        document.addEventListener('astro:after-swap', () => {
+    const goBackButton = document.getElementById('go-back');
+    goBackButton.addEventListener('click', () => {
+      window.history.back();
+    });
+
+});
+
+const goBackButton = document.getElementById('go-back');
+    goBackButton.addEventListener('click', () => {
+      window.history.back();
+    });
+</script>

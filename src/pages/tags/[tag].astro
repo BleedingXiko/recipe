@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Card from "../../components/Card.astro";
+import Back from '../../components/Back.astro';
 import Scroll from '../../components/ScrollTop.astro';
 
 import { getCollection } from "astro:content";
@@ -25,6 +26,7 @@ const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 <Layout title={tag}>
+  <Back />
   <h1 data-pagefind-ignore>Posts tagged with {tag}</h1>
   <ul>
     {
