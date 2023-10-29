@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 const allPosts = await getCollection("recipes");
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
-const pageTitle = "Tag Index";
+const pageTitle = "Tags";
 ---
 <Layout title={pageTitle}>
   <h1 data-pagefind-ignore>Search by Tags</h1>
