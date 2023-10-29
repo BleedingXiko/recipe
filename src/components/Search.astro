@@ -16,10 +16,10 @@
 
     /* Style for the search input */
     #search {
-        width: 80%;
+        width: 60%;
         padding: 10px;
         color: black;
-        border: 1px solid var(--primary); /* Use your --primary variable */
+        border: 1px solid var(--primary);
         border-radius: 5px;
         font-size: 16px;
         outline: none;
@@ -27,19 +27,21 @@
 
     /* Style for the results container */
     #results {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         width: 80%;
         margin-top: 10px;
         padding: 10px;
-        border: 1px solid var(--primary); /* Use your --primary variable or another theme variable */
+        border: 1px solid var(--primary); 
         border-radius: 5px;
-        background-color: var(--background); /* Use your --background variable or another theme variable */
+        background-color: var(--background); 
     }
 
     /* Style for individual results */
     .result {
-        background-color: var(--primary);
         padding: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         border-radius: 5px;
         text-decoration: none;
         color: var(--text); /* Set text color to match your theme */

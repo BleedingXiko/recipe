@@ -6,7 +6,7 @@ const allPosts = await getCollection('recipes')
 ---
 
 <Layout title="All Recipes">
-	  <h1>All Recipes</h1>
+	  <h1 data-pagefind-ignore>All Recipes</h1>
 	  <ul>
 		{
 		  allPosts.map((post) => (
