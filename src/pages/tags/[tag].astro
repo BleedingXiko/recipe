@@ -28,10 +28,13 @@ const { posts } = Astro.props;
 <Layout title={tag}>
   <Back />
   <h1 data-pagefind-ignore>Posts tagged with {tag}</h1>
-  <ul>
+  <ul data-pagefind-ignore>
     {
       posts.map((post) => (
-      <Card slug={post.slug} href={`/recipes/${post.slug}/`} title={post.data.title} description={post.data.description} imageUrl={post.data.image.url} imageAlt={post.data.image.alt}/>)
+        <li data-pagefind-ignore>
+      <Card slug={post.slug} href={`/recipes/${post.slug}/`} title={post.data.title} description={post.data.description} imageUrl={post.data.image.url} imageAlt={post.data.image.alt}/>
+    </li>
+      )
       )
     }
   </ul>
