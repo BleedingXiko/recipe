@@ -22,17 +22,6 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<ViewTransitions />
-		<script is:inline>
-			// The configured mode is stored in local storage
-			const isDarkMode = localStorage.getItem('theme');
-		
-			// Set theme to 'dark' if darkMode = 'true'
-			const theme = isDarkMode === 'dark' ? 'dark' : 'light';
-		
-			// Put dark class on html tag to enable dark mode
-			document.querySelector("html").setAttribute("data-theme", theme);
-		
-		  </script>
 	</head>
 	<body>
 		<Nav />
@@ -41,6 +30,18 @@ const { title } = Astro.props;
 		<Footer />
 	</body>
 </html>
+
+<script>
+	// The configured mode is stored in local storage
+	const isDarkMode = localStorage.getItem('theme');
+
+	// Set theme to 'dark' if darkMode = 'true'
+	const theme = isDarkMode === 'dark' ? 'dark' : 'light';
+
+	// Put dark class on html tag to enable dark mode
+	document.querySelector("html").setAttribute("data-theme", theme);
+
+  </script>
 
 <style is:global>
 
