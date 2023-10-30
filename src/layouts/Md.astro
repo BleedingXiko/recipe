@@ -9,7 +9,7 @@ const {frontmatter} = Astro.props;
 <Layout title={frontmatter.title}>
     <Back />
     <article class="text-center flex flex-col">
-         <Image height="500" width="500" class=" self-center" transition:name={`hero${frontmatter.slug}`} src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+         <Image height="500" width="500" class=" self-center" src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
     {/*
         <button id="saveButton"> save to favorites</button>
     */}
