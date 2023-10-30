@@ -2,7 +2,7 @@
 title: 'Chicken Parmesan'
 description: "Delicious chicken cutlets with crispy coating, topped with cheese, and served with marinara sauce."
 image:
-  url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1697739471/recipe-site/chicenparm_ql2gu2.jpg"
+  url: "https://images.ctfassets.net/jvolqg0juasx/2tmOZtKIwouEnlzH5HeYZU/d92c6a96ff2193b2546a59625c3525d7/chicken-parm.png"
   alt: "Chicken Parmesan"
 tags: ["dinner", "Italian", "chicken"]
 ---

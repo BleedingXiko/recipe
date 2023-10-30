@@ -2,7 +2,7 @@
 title: 'Beef and Bean Burritos'
 description: "Delicious beef and bean burritos with taco-seasoned ground beef, refried beans, and melted cheese, served with sour cream and salsa."
 image:
-  url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1697739470/recipe-site/burrito_zrnh5s.jpg"
+  url: "https://images.ctfassets.net/jvolqg0juasx/5t8CXXQlZdduYhmivFwJKn/5264d4d40b7b85f71b1c6d14da29700f/burrito.png"
   alt: "Beef and Bean Burritos"
 tags: ["dinner", "burritos"]
 ---

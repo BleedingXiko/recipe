@@ -2,7 +2,7 @@
 title: 'Shrimp and Sausage Skillet'
 description: "A delicious and easy-to-make skillet dish with shrimp, smoked sausage, and colorful bell peppers."
 image:
-  url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1697739470/recipe-site/shrimpsausage_pvylkg.jpg"
+  url: "https://images.ctfassets.net/jvolqg0juasx/5dH6QLedSK8l5xQ1NVpPMa/d12ce8b887e2c3267b0bf2f0d9cc3eb4/sausageshrimp.png"
   alt: "Shrimp and Sausage Skillet"
 tags: ["dinner", "seafood", "stir fry"]
 ---

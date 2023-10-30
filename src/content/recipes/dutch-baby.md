@@ -2,7 +2,7 @@
 title: 'Dutch Baby Pancake'
 description: "A delightful Dutch Baby pancake that puffs up beautifully in the oven and is topped with lemon and confectioners' sugar."
 image:
-  url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1697739470/recipe-site/dutch-pancake_voiwsl.webp"
+  url: "https://images.ctfassets.net/jvolqg0juasx/1E6HpDR9HJJixJyC5QyhdO/2b832185a5d591e6d9ed4ab6cc268aa3/dutchpancake.png"
   alt: "Dutch Baby Pancake"
 tags: ["breakfast", "pancakes"]
 ---

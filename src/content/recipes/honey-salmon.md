@@ -2,7 +2,7 @@
 title: 'Honey Soy Glazed Salmon'
 description: "Learn how to make delicious honey soy glazed salmon with crispy skin."
 image:
-  url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1697739470/recipe-site/honey-salmon_ftliy7.jpg"
+  url: "https://images.ctfassets.net/jvolqg0juasx/3xQgvPICpcr6RRufV4ZaxZ/6d67737f4d867c8f44909beedb620b78/honeysalmon.png"
   alt: "Honey Soy Glazed Salmon"
 tags: ["seafood", "dinner"]
 ---

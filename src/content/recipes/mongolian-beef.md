@@ -2,7 +2,7 @@
 title: 'Mongolian Beef'
 description: "Enjoy the best Mongolian Beef you'll ever taste, inspired by P.F. Chang's recipe. Tender beef, a slightly sweet and savory sauce, and served over steamed rice."
 image:
-  url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1697739471/recipe-site/Mongolian_Beef_recipe_jl42wo.jpg"
+  url: "https://images.ctfassets.net/jvolqg0juasx/3CKda48fdYmKMIZ7jBw6FM/c0b477341e348e115e97b502f54c69c1/beefandrice.png"
   alt: "Mongolian Beef with White Rice and Spoon"
 tags: ["dinner", "stir fry"]
 ---

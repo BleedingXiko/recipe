@@ -2,7 +2,7 @@
 title: 'Grilled Buffalo Chicken Wings'
 description: "Spice up your grill with these perfectly grilled buffalo chicken wings coated in a tangy, spicy sauce."
 image:
-  url: "https://res.cloudinary.com/dpfu8nq5k/image/upload/v1697740261/recipe-site/wings_zayru4.jpg"
+  url: "https://images.ctfassets.net/jvolqg0juasx/37UFnMYKZqASvlLM4vgekN/fbe247418bd9134ae50ea503601a5c94/hotwings.png"
   alt: "Grilled Buffalo Chicken Wings"
 tags: ["dinner", "chicken"]
 ---
