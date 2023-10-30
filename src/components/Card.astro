@@ -122,10 +122,13 @@ cards.forEach((card) => {
         margin: 10px; /* Add some margin between cards */
 		transition: transform 0.3s ease;
     }
-	@media (max-width: 760px){
+	@media (max-width: 900px){
 		.custom-card{
 			width: 60%;
 		}
+        .card-grid {
+        max-width: 80%; /* Temp solution for dif card sizes */
+    }
 	}
 
     .custom-card:hover {
