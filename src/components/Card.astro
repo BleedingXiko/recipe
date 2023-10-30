@@ -16,7 +16,7 @@ const { href, title, description, imageAlt, imageUrl, slug } = Astro.props;
         <a href={href} class="card-link">
             <div class="card-content">
                 <div class="card-image">
-                    <Image height="500" width="500" src={imageUrl} alt={imageAlt} transition:name={`hero${slug}`}/>
+                    <Image height="600" width="500" src={imageUrl} alt={imageAlt} transition:name={`hero${slug}`}/>
                 </div>
                 <div class="card-details">
                     <h2>{title}</h2>
@@ -109,7 +109,7 @@ cards.forEach((card) => {
         justify-content: center; /* Center the cards horizontally */
         align-items: center; /* Center the cards vertically */
         flex-wrap: wrap; /* Allow cards to wrap to the next row */
-        max-width: 40%; /* Temp solution for dif card sizes */
+        max-width: 50%; /* Temp solution for dif card sizes */
         margin: 0 auto;
         margin-bottom: 15px;
     }
@@ -124,7 +124,7 @@ cards.forEach((card) => {
     }
 	@media (max-width: 900px){
 		.custom-card{
-			width: 60%;
+			width: 80%;
 		}
         .card-grid {
         max-width: 80%; /* Temp solution for dif card sizes */
