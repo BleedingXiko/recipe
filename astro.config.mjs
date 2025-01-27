@@ -13,8 +13,8 @@ export default defineConfig({
       '/api': 'https://openrouter.ai/api/v1/chat/completions', // This redirects your local requests to the external API
     },
     
-        output: 'server',
-        adapter: netlify(),
   },
+  output: 'server',
+  adapter: netlify(),
 });
 
