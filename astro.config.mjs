@@ -1,3 +1,4 @@
+import netlify from '@astrojs/netlify';
 import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
@@ -11,5 +12,9 @@ export default defineConfig({
     proxy: {
       '/api': 'https://openrouter.ai/api/v1/chat/completions', // This redirects your local requests to the external API
     },
+    
+        output: 'server',
+        adapter: netlify(),
   },
 });
+
