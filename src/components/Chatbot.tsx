@@ -38,6 +38,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
         headers: {
           'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*', // Allow requests from any origin
         },
         body: JSON.stringify({
           model: 'deepseek/deepseek-chat',
