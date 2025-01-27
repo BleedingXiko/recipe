@@ -40,7 +40,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'openai/gpt-3.5-turbo',
+          model: 'deepseek/deepseek-chat',
           messages: [{ role: 'user', content: prompt }],
         }),
       });
