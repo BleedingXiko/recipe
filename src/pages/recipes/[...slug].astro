@@ -1,17 +1,30 @@
 ---
 import { getCollection } from 'astro:content';
+import Chatbot from '../../components/Chatbot.tsx';
 import Md from '../../layouts/Md.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('recipes');
   return blogEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
+    params: { slug: entry.slug }, 
+    props: { entry }
   }));
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Ensure entry.data contains the necessary fields for the recipe prop
+const recipe = {
+  title: entry.data.title,
+  content: entry.data.content,
+};
+
+// Getting the API key
+const apiKey = import.meta.env.OPENROUTER_API_KEY;
+
 ---
 <Md frontmatter={entry.data}>
   <Content />
+  <Chatbot apiKey={apiKey} recipe={recipe} client:load />
 </Md>
