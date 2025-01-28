@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Api from '../../netlify/functions/openrouter.mjs'
 
 interface Message {
   content: string;
@@ -7,12 +8,11 @@ interface Message {
 
 interface ChatbotProps {
   recipe: { title: string; content: string };
-  apiKey: string; 
 }
 
 
 
-const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
+const Chatbot: React.FC<ChatbotProps> = ({ recipe }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -33,18 +33,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
       User Question: ${input}
       Answer the question while maintaining recipe context:`;
 
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*', // Allow requests from any origin
-        },
-        body: JSON.stringify({
-          model: 'deepseek/deepseek-chat',
-          messages: [{ role: 'user', content: prompt }],
-        }),
-      });
+      const response = await Api;
 
       const data = await response.json();
       const botMessage = data.choices?.[0]?.message.content || 'No response from chatbot.';
