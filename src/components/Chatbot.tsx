@@ -8,11 +8,12 @@ interface Message {
 
 interface ChatbotProps {
   recipe: { title: string; content: string };
+  apiKey: string; 
 }
 
 
 
-const Chatbot: React.FC<ChatbotProps> = ({ recipe }) => {
+const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -21,22 +22,35 @@ const Chatbot: React.FC<ChatbotProps> = ({ recipe }) => {
 
   const handleSend = async () => {
     if (!input.trim()) return;
-
+  
     const newMessage: Message = { content: input, role: 'user' };
     setMessages((prev) => [...prev, newMessage]);
     setInput('');
     setIsLoading(true);
-
+  
     try {
       const prompt = `Recipe Context: ${recipe.title}
-      ${recipe.description}
+      ${recipe.content}
       User Question: ${input}
       Answer the question while maintaining recipe context:`;
-
-      const response = await Api;
-
+  
+      const response = await fetch('/.netlify/functions/openrouter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'deepseek/deepseek-chat',
+          messages: [{ role: 'user', content: prompt }],
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+  
       const data = await response.json();
-      const botMessage = data.body || 'No response from chatbot.';
+      const botMessage = data.choices?.[0]?.message?.content || 'No response from chatbot.';
       setMessages((prev) => [...prev, { content: botMessage, role: 'assistant' }]);
     } catch (error) {
       setMessages((prev) => [
@@ -46,6 +60,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ recipe }) => {
     }
     setIsLoading(false);
   };
+  
 
   if (!isOpen) {
     return (
