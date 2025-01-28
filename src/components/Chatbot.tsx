@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Api from '../../netlify/functions/openrouter.mjs'
+import Api from '../../netlify/functions/openrouter.js'
 
 interface Message {
   content: string;
@@ -36,7 +36,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ recipe }) => {
       const response = await Api;
 
       const data = await response.json();
-      const botMessage = data.choices?.[0]?.message.content || 'No response from chatbot.';
+      const botMessage = data.body || 'No response from chatbot.';
       setMessages((prev) => [...prev, { content: botMessage, role: 'assistant' }]);
     } catch (error) {
       setMessages((prev) => [
