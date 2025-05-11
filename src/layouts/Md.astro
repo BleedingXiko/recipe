@@ -11,14 +11,14 @@ const {frontmatter} = Astro.props;
         <div class="absolute left-4 top-0 sm:left-6 z-10">
             <Back />
         </div>
-        <article class="recipe-content bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mt-8">
+        <article class="recipe-content rounded-lg shadow-lg overflow-hidden mt-8">
             <div class="recipe-hero relative">
                 <img class="w-full h-64 sm:h-80 object-cover" src={frontmatter.image.url} alt={frontmatter.image.alt} />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-4 sm:p-6">
                     <div class="flex flex-wrap gap-2 mb-2">
                         {frontmatter.tags.map((tag: string) => (
-                            <span class="text-xs font-medium px-2 py-1 rounded-full bg-blue-500/80 text-white">{tag}</span>
+                            <span class="text-xs font-medium px-2 py-1 rounded-full bg-accent text-text-on-accent">{tag}</span>
                         ))}
                     </div>
                 </div>
@@ -34,6 +34,18 @@ const {frontmatter} = Astro.props;
 
 
 <style is:global> 
+    /* Variables for recipe-specific styling */
+    :root {
+        --text-on-accent: white;
+    }
+
+    /* Main recipe styles with theme variables */
+    .recipe-content {
+        background-color: var(--secondary);
+        color: var(--text);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
     /* Main recipe title */
     .recipe-content h1 {
         font-size: 2.25rem;
@@ -87,7 +99,7 @@ const {frontmatter} = Astro.props;
         position: relative;
         padding: 0.5rem 0 0.5rem 3rem;
         border-radius: 0.5rem;
-        background-color: var(--secondary);
+        background-color: var(--primary);
         line-height: 1.6;
     }
     
@@ -112,7 +124,7 @@ const {frontmatter} = Astro.props;
         list-style: none;
         padding: 1.5rem;
         margin: 1.5rem 0;
-        background-color: var(--secondary);
+        background-color: var(--primary);
         border-radius: 0.5rem;
         width: 100%;
     }

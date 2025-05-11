@@ -80,7 +80,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { content: 'Error connecting to chatbot. Please try again.', role: 'system' },
+        { content: 'Error connecting to chatbot. Please try again.', role: 'assistant' },
       ]);
     }
     setIsLoading(false);
@@ -90,7 +90,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
   if (!isOpen) {
     return (
       <div 
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-full shadow-lg cursor-pointer flex items-center justify-center hover:bg-blue-600 transition-colors z-50"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 bg-accent rounded-full shadow-lg cursor-pointer flex items-center justify-center hover:opacity-90 transition-colors z-50"
         onClick={() => setIsOpen(true)}
       >
         <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,14 +101,14 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-[95%] sm:w-[90%] max-w-xs sm:max-w-md max-h-[90vh] bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 ease-in-out z-50">
+    <div className="chatbot-widget fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-[95%] sm:w-[90%] max-w-xs sm:max-w-md max-h-[90vh] rounded-lg shadow-xl overflow-hidden transition-all duration-300 ease-in-out z-50">
       <style>{chatbotStyles}</style>
-      <div className="bg-blue-500 p-3 flex justify-between items-center">
-        <h3 className="text-white font-semibold text-base">Recipe Assistant</h3>
+      <div className="chatbot-header p-3 flex justify-between items-center">
+        <h3 className="font-semibold text-base">Recipe Assistant</h3>
         <div className="flex gap-2">
           <button 
             onClick={() => setIsMinimized(!isMinimized)}
-            className="text-white hover:text-blue-200 transition-colors p-1"
+            className="hover:opacity-80 transition-colors p-1"
           >
             {isMinimized ? (
               <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
           </button>
           <button 
             onClick={() => setIsOpen(false)}
-            className="text-white hover:text-blue-200 transition-colors p-1"
+            className="hover:opacity-80 transition-colors p-1"
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -133,45 +133,47 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
 
       {!isMinimized && (
         <div className="flex flex-col h-[60vh] sm:h-96">
-          <div className="chatbot-messages flex-1 overflow-y-auto p-3 space-y-2 bg-gray-50">
+          <div className="chatbot-messages flex-1 overflow-y-auto p-3 space-y-2">
             {messages.length === 0 && (
-              <div className="text-center text-gray-500 py-4 text-sm">
+              <div className="text-center py-4 text-sm opacity-70">
                 Ask any questions about this recipe!
               </div>
             )}
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`p-2 rounded-lg max-w-[90%] text-sm sm:text-base ${
-                  message.role === 'user'
-                    ? 'ml-auto bg-blue-500 text-white'
-                    : 'bg-white text-gray-800 border border-gray-200'
-                }`}
-              >
-                {message.content}
-              </div>
-            ))}
+            {messages
+              .filter(message => message.role !== 'system')
+              .map((message, index) => (
+                <div
+                  key={index}
+                  className={`p-2 rounded-lg max-w-[90%] text-sm sm:text-base ${
+                    message.role === 'user'
+                      ? 'ml-auto user-message'
+                      : 'assistant-message'
+                  }`}
+                >
+                  {message.content}
+                </div>
+              ))}
             {isLoading && (
               <div className="flex justify-center p-2">
-                <div className="animate-pulse text-gray-500 text-sm">Thinking...</div>
+                <div className="animate-pulse text-sm opacity-70">Thinking...</div>
               </div>
             )}
           </div>
 
-          <div className="p-3 border-t border-gray-200">
+          <div className="p-3 chatbot-input-container">
             <div className="flex gap-2">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !isLoading && handleSend()}
-                className="chatbot-input flex-1 p-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
+                className="chatbot-input flex-1 p-2 text-sm sm:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                 placeholder="Ask about this recipe..."
                 disabled={isLoading}
               />
               <button
                 onClick={handleSend}
-                className="px-3 py-2 text-sm sm:text-base bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 transition-colors"
+                className="px-3 py-2 text-sm sm:text-base rounded-lg transition-colors send-button"
                 disabled={isLoading || !input.trim()}
               >
                 Send
@@ -186,10 +188,65 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
 
 export default Chatbot;
 
-// Add custom CSS style for placeholder and mobile improvements
+// Add custom CSS style for placeholder and mobile improvements, using theme variables
 const chatbotStyles = `
+  .chatbot-widget {
+    background-color: var(--secondary);
+    color: var(--text);
+  }
+  
+  .chatbot-header {
+    background-color: var(--primary);
+    color: var(--text);
+  }
+  
+  .chatbot-messages {
+    background-color: var(--background);
+  }
+  
+  .user-message {
+    background-color: var(--accent);
+    color: white;
+  }
+  
+  .assistant-message {
+    background-color: var(--primary);
+    color: var(--text);
+  }
+  
+  .system-message {
+    background-color: var(--secondary);
+    color: var(--text);
+    font-style: italic;
+  }
+  
+  .chatbot-input-container {
+    border-top: 1px solid var(--primary);
+    background-color: var(--secondary);
+  }
+  
+  .chatbot-input {
+    background-color: var(--background);
+    color: var(--text);
+    border: 1px solid var(--primary);
+  }
+  
   .chatbot-input::placeholder {
-    color: #9CA3AF; /* gray-400 color for placeholder */
+    color: var(--text);
+    opacity: 0.6;
+  }
+  
+  .send-button {
+    background-color: var(--accent);
+    color: white;
+  }
+  
+  .send-button:hover {
+    opacity: 0.9;
+  }
+  
+  .send-button:disabled {
+    opacity: 0.5;
   }
   
   @media (max-width: 640px) {
@@ -198,7 +255,8 @@ const chatbotStyles = `
     }
     
     .chatbot-messages::-webkit-scrollbar-thumb {
-      background-color: rgba(156, 163, 175, 0.5);
+      background-color: var(--accent);
+      opacity: 0.5;
       border-radius: 3px;
     }
     
