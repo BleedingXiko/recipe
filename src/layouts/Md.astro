@@ -192,8 +192,8 @@ const {frontmatter} = Astro.props;
 </style>
 
 <script>
-    // Add click event listeners to recipe instructions
-    document.addEventListener('DOMContentLoaded', () => {
+    // Function to initialize click handlers for recipe instructions
+    function initializeInstructionHandlers() {
         const instructionItems = document.querySelectorAll('.recipe-content ol li');
         
         // Add click handler to toggle completed state
@@ -202,5 +202,11 @@ const {frontmatter} = Astro.props;
                 item.classList.toggle('completed');
             });
         });
-    });
+    }
+
+    // Run on initial page load
+    document.addEventListener('DOMContentLoaded', initializeInstructionHandlers);
+    
+    // Run after Astro page transitions (for client-side navigation)
+    document.addEventListener('astro:page-load', initializeInstructionHandlers);
 </script>
