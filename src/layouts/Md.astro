@@ -7,9 +7,11 @@ const {frontmatter} = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-    <div class="recipe-container mx-auto px-4 sm:px-6 py-8 max-w-4xl">
-        <Back />
-        <article class="recipe-content bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+    <div class="recipe-container mx-auto px-4 sm:px-6 py-8 max-w-4xl relative">
+        <div class="absolute left-4 top-0 sm:left-6 z-10">
+            <Back />
+        </div>
+        <article class="recipe-content bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mt-8">
             <div class="recipe-hero relative">
                 <img class="w-full h-64 sm:h-80 object-cover" src={frontmatter.image.url} alt={frontmatter.image.alt} />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>

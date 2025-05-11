@@ -11,8 +11,6 @@ interface ChatbotProps {
   apiKey: string; 
 }
 
-
-
 const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -24,6 +22,10 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       setMessages([
+        {
+          role: 'system',
+          content: `You are a helpful recipe assistant for the recipe "${recipe.title}". Use the provided recipe details to answer questions accurately.`
+        },
         {
           role: 'assistant',
           content: `Hi there! I'm your recipe assistant for "${recipe.title}". Ask me any questions about ingredients, substitutions, or cooking steps!`
@@ -41,19 +43,30 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
     setIsLoading(true);
   
     try {
-      const prompt = `Recipe Context: ${recipe.title}
-      ${recipe.content}
-      User Question: ${input}
-      Answer the question while maintaining recipe context:`;
-  
+      // Create conversation context with all previous messages except the system message
+      const conversationMessages = messages.filter(msg => msg.role !== 'system');
+      
+      // Add the system message first, then include all conversation history
+      const apiMessages = [
+        {
+          role: 'system',
+          content: `You are a helpful recipe assistant for "${recipe.title}". Here is the recipe context:
+          ${recipe.content}
+          
+          Answer the user's questions about this recipe using the provided context.`
+        },
+        ...conversationMessages,
+        { role: 'user', content: input }
+      ];
+      
       const response = await fetch('/.netlify/functions/openrouter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'deepseek/deepseek-chat-v3-0324:free',
-          messages: [{ role: 'user', content: prompt }],
+          model: 'google/gemini-2.0-flash-exp:free',
+          messages: apiMessages,
         }),
       });
   
