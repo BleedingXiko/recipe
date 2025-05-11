@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import openRouterApi from '../../netlify/functions/openrouter.js';
+// Remove direct import that might cause issues
+// import openRouterApi from '../../netlify/functions/openrouter.js';
 
 interface Message {
   content: string;
@@ -17,12 +18,20 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [position, setPosition] = useState({ x: window.innerWidth - 100, y: window.innerHeight - 100 });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   
   const chatButtonRef = useRef<HTMLDivElement>(null);
   const chatWidgetRef = useRef<HTMLDivElement>(null);
+
+  // Initialize position on client-side only to prevent SSR errors
+  useEffect(() => {
+    setPosition({ 
+      x: typeof window !== 'undefined' ? window.innerWidth - 100 : 0, 
+      y: typeof window !== 'undefined' ? window.innerHeight - 100 : 0 
+    });
+  }, []);
 
   // Set welcome message on first open
   useEffect(() => {
@@ -40,8 +49,10 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
     }
   }, [isOpen, messages.length, recipe.title]);
 
-  // Handle dragging
+  // Handle dragging - only add event listeners on client side
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Skip during SSR
+    
     const handleMouseMove = (e: MouseEvent) => {
       if (isDragging && !isOpen) {
         const newX = e.clientX - dragOffset.x;
