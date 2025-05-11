@@ -37,6 +37,7 @@ const {frontmatter} = Astro.props;
     /* Variables for recipe-specific styling */
     :root {
         --text-on-accent: white;
+        --title-color: var(--accent);
     }
 
     /* Main recipe styles with theme variables */
@@ -50,7 +51,7 @@ const {frontmatter} = Astro.props;
     .recipe-content h1 {
         font-size: 2.25rem;
         font-weight: 700;
-        color: var(--text);
+        color: var(--title-color);
         margin-bottom: 1.5rem;
         line-height: 1.2;
         text-align: left;
@@ -60,7 +61,7 @@ const {frontmatter} = Astro.props;
     .recipe-content h2 {
         font-size: 1.5rem;
         font-weight: 600;
-        color: var(--text);
+        color: var(--title-color);
         margin-top: 2rem;
         margin-bottom: 1rem;
         padding-bottom: 0.5rem;
@@ -74,11 +75,12 @@ const {frontmatter} = Astro.props;
         line-height: 1.6;
         text-align: left;
         max-width: 65ch;
+        color: white;
     }
 
     /* Strong text for ingredient headers */
     .recipe-content strong {
-        color: var(--accent);
+        color: var(--title-color);
         font-weight: 600;
     }
     
@@ -101,6 +103,7 @@ const {frontmatter} = Astro.props;
         border-radius: 0.5rem;
         background-color: var(--primary);
         line-height: 1.6;
+        color: white;
     }
     
     .recipe-content ol li::before {
@@ -135,6 +138,7 @@ const {frontmatter} = Astro.props;
         margin-bottom: 0.5rem;
         line-height: 1.6;
         text-align: left;
+        color: white;
     }
     
     .recipe-content ul li::before {
