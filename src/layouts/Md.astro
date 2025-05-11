@@ -18,7 +18,7 @@ const {frontmatter} = Astro.props;
                 <div class="absolute bottom-0 left-0 p-4 sm:p-6">
                     <div class="flex flex-wrap gap-2 mb-2">
                         {frontmatter.tags.map((tag: string) => (
-                            <span class="text-xs font-medium px-2 py-1 rounded-full bg-accent text-text-on-accent">{tag}</span>
+                            <span class="tag-pill text-xs font-medium px-2 py-1 rounded-full bg-accent">{tag}</span>
                         ))}
                     </div>
                 </div>
@@ -38,6 +38,11 @@ const {frontmatter} = Astro.props;
     :root {
         --text-on-accent: white;
         --title-color: var(--accent);
+    }
+
+    /* Tag styling with white text in both themes */
+    .tag-pill {
+        color: white !important;
     }
 
     /* Main recipe styles with theme variables */
@@ -75,7 +80,19 @@ const {frontmatter} = Astro.props;
         line-height: 1.6;
         text-align: left;
         max-width: 65ch;
+    }
+
+    /* Light and dark mode specific text colors */
+    :root[data-theme="dark"] .recipe-content p,
+    :root[data-theme="dark"] .recipe-content ul li,
+    :root[data-theme="dark"] .recipe-content ol li {
         color: white;
+    }
+    
+    :root[data-theme="light"] .recipe-content p,
+    :root[data-theme="light"] .recipe-content ul li,
+    :root[data-theme="light"] .recipe-content ol li {
+        color: black;
     }
 
     /* Strong text for ingredient headers */
@@ -103,7 +120,6 @@ const {frontmatter} = Astro.props;
         border-radius: 0.5rem;
         background-color: var(--primary);
         line-height: 1.6;
-        color: white;
     }
     
     .recipe-content ol li::before {
@@ -138,7 +154,6 @@ const {frontmatter} = Astro.props;
         margin-bottom: 0.5rem;
         line-height: 1.6;
         text-align: left;
-        color: white;
     }
     
     .recipe-content ul li::before {

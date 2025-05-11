@@ -1,67 +1,69 @@
-<div id="scroll-to-top">
-    <a href="#top" data-pagefind-ignore>↑</a>
-</div>
-
-
-
-
+<button id="scroll-to-top" aria-label="Scroll to top" data-pagefind-ignore>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m18 15-6-6-6 6"/>
+    </svg>
+</button>
 
 <script>
-    document.addEventListener('astro:after-swap', () => {
-const scrollToTopButton = document.getElementById('scroll-to-top');
+    function setupScrollToTop() {
+        const scrollToTopButton = document.getElementById('scroll-to-top');
+        if (!scrollToTopButton) return;
 
-window.addEventListener('scroll', () => {
- if (window.scrollY > 100) {
-   scrollToTopButton.style.display = 'block';
- } else {
-   scrollToTopButton.style.display = 'none';
- }
-});
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                scrollToTopButton.classList.add('visible');
+            } else {
+                scrollToTopButton.classList.remove('visible');
+            }
+        });
 
-scrollToTopButton.addEventListener('click', () => {
- window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+        scrollToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-    });
-
-
-
-    const scrollToTopButton = document.getElementById('scroll-to-top');
-
-window.addEventListener('scroll', () => {
- if (window.scrollY > 100) {
-   scrollToTopButton.style.display = 'block';
- } else {
-   scrollToTopButton.style.display = 'none';
- }
-});
-
-scrollToTopButton.addEventListener('click', () => {
- window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
+    // Run on initial load
+    setupScrollToTop();
+    
+    // Run after page transitions
+    document.addEventListener('astro:after-swap', setupScrollToTop);
 </script>
 
 <style>
 #scroll-to-top {
- position: fixed;
- margin-bottom: 10px;
- bottom: 25px;
- left: 25px;
- background-color: var(--primary);
- color: var(--text);
- border: 2px solid var(--primary);
- border-radius: 50%;
- padding: 10px 25px;
- font-size: 25px;
- cursor: pointer;
- display: none;
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    background-color: var(--primary);
+    color: var(--text);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 40;
 }
 
-#scroll-to-top a {
- text-decoration: none;
- color: inherit;
+#scroll-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
+#scroll-to-top:hover {
+    background-color: var(--accent);
+}
 
+#scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+}
 </style>
