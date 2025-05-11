@@ -1,4 +1,4 @@
-export async function handler(event) {
+export const handler = async (event, context) => {
   try {
     // Check for POST method
     if (event.httpMethod !== 'POST') {
@@ -17,7 +17,7 @@ export async function handler(event) {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        'HTTP-Referer': event.headers.referer || 'unknown',
+        'HTTP-Referer': event.headers.referer || 'https://katchupkitchen.netlify.app/',
         'X-Title': 'Katchup Kitchen',
       },
       body: JSON.stringify(body),
@@ -31,13 +31,25 @@ export async function handler(event) {
 
     return {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      },
       body: JSON.stringify(data),
     };
   } catch (error) {
     console.error(error);
     return {
       statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
       body: JSON.stringify({ error: error.message || 'Internal server error' }),
     };
   }
-}
+};
+
+export default { handler };

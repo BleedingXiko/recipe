@@ -1,0 +1,24 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[dev]
+  command = "npm run dev"
+  framework = "astro"
+
+[[redirects]]
+  from = "/.netlify/functions/openrouter"
+  to = "/.netlify/functions/openrouter"
+  status = 200
+
+[[redirects]]
+  from = "/api/chat"
+  to = "/.netlify/functions/openrouter"
+  status = 200
+  
+[functions]
+  node_bundler = "esbuild"
+
+[build.environment]
+  NODE_VERSION = "20" 

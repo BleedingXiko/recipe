@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Api from '../../netlify/functions/openrouter.js'
+import openRouterApi from '../../netlify/functions/openrouter.js';
 
 interface Message {
   content: string;
@@ -40,7 +40,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'deepseek/deepseek-chat',
+          model: 'deepseek/deepseek-chat-v3-0324:free',
           messages: [{ role: 'user', content: prompt }],
         }),
       });

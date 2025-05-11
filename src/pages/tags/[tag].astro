@@ -6,8 +6,10 @@ import Scroll from '../../components/ScrollTop.astro';
 
 import { getCollection } from "astro:content";
 
-export async function getStaticPaths() {
+// Add prerender flag for static generation
+export const prerender = true;
 
+export async function getStaticPaths() {
   const allPosts = await getCollection("recipes");
   const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 
@@ -23,22 +25,27 @@ export async function getStaticPaths() {
 }
 
 const { tag } = Astro.params;
-const { posts } = Astro.props;
+const { posts = [] } = Astro.props; // Provide a default empty array for posts
 ---
 <Layout title={tag}>
   <Back />
   <h1 data-pagefind-ignore>Posts tagged with {tag}</h1>
   <ul data-pagefind-ignore>
     {
-      posts.map((post) => (
+      posts && posts.length > 0 ? posts.map((post) => (
         <li data-pagefind-ignore>
-      <Card slug={post.slug} href={`/recipes/${post.slug}/`} title={post.data.title} description={post.data.description} imageUrl={post.data.image.url} imageAlt={post.data.image.alt}/>
-    </li>
-      )
-      )
+          <Card 
+            slug={post.slug} 
+            href={`/recipes/${post.slug}/`} 
+            title={post.data.title} 
+            description={post.data.description} 
+            imageUrl={post.data.image.url} 
+            imageAlt={post.data.image.alt}
+          />
+        </li>
+      )) : <p>No posts found with this tag.</p>
     }
   </ul>
   <Scroll />
-  
 </Layout>
 

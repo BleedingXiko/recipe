@@ -3,6 +3,9 @@ import { getCollection } from 'astro:content';
 import Chatbot from '../../components/Chatbot.tsx';
 import Md from '../../layouts/Md.astro';
 
+// Add prerender flag for static generation
+export const prerender = true;
+
 export async function getStaticPaths() {
   const blogEntries = await getCollection('recipes');
   return blogEntries.map(entry => ({
@@ -12,12 +15,18 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+let Content;
+try {
+  const rendered = await entry.render();
+  Content = rendered.Content;
+} catch (error) {
+  console.error("Error rendering content:", error);
+}
 
-// Ensure entry.data contains the necessary fields for the recipe prop
+// Create a recipe object with available data
 const recipe = {
   title: entry.data.title,
-  content: entry.data.content,
+  content: entry.data.description + "\n\n" + entry.body, // Use description + markdown body
 };
 
 // Getting the API key
@@ -25,6 +34,6 @@ const apiKey = import.meta.env.OPENROUTER_API_KEY;
 
 ---
 <Md frontmatter={entry.data}>
-  <Content />
+  {Content && <Content />}
   <Chatbot apiKey={apiKey} recipe={recipe} client:load />
 </Md>
