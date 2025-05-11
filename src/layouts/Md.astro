@@ -38,6 +38,7 @@ const {frontmatter} = Astro.props;
     :root {
         --text-on-accent: white;
         --title-color: var(--accent);
+        --completed-step: #ffcccc; /* Light red for completed steps */
     }
 
     /* Tag styling with white text in both themes */
@@ -120,6 +121,12 @@ const {frontmatter} = Astro.props;
         border-radius: 0.5rem;
         background-color: var(--primary);
         line-height: 1.6;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .recipe-content ol li.completed {
+        background-color: var(--completed-step);
     }
     
     .recipe-content ol li::before {
@@ -183,3 +190,17 @@ const {frontmatter} = Astro.props;
         }
     }
 </style>
+
+<script>
+    // Add click event listeners to recipe instructions
+    document.addEventListener('DOMContentLoaded', () => {
+        const instructionItems = document.querySelectorAll('.recipe-content ol li');
+        
+        // Add click handler to toggle completed state
+        instructionItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('completed');
+            });
+        });
+    });
+</script>
