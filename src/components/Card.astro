@@ -17,7 +17,8 @@ const { href, title, description, imageAlt, imageUrl, slug } = Astro.props;
         <a href={href} class="card-link">
             <div class="card-content">
                 <div class="card-image">
-                    <Image height="600" width="500" src={imageUrl} alt={imageAlt}/>
+                    <!-- Use img tag as fallback for remote images -->
+                    <img src={imageUrl} alt={imageAlt} width="500" height="600" />
                 </div>
                 <div class="card-details">
                     <h2>{title}</h2>

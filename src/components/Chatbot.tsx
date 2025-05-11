@@ -77,6 +77,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
 
   return (
     <div className="fixed bottom-6 right-6 w-full max-w-md bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 ease-in-out">
+      <style>{chatbotStyles}</style>
       <div className="bg-blue-500 p-4 flex justify-between items-center">
         <h3 className="text-white font-semibold">Recipe Assistant</h3>
         <div className="flex gap-2">
@@ -134,7 +135,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !isLoading && handleSend()}
-                className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="chatbot-input flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
                 placeholder="Ask about this recipe..."
                 disabled={isLoading}
               />
@@ -154,3 +155,10 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
 };
 
 export default Chatbot;
+
+// Add custom CSS style for placeholder
+const chatbotStyles = `
+  .chatbot-input::placeholder {
+    color: #9CA3AF; /* gray-400 color for placeholder */
+  }
+`;

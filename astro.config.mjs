@@ -15,5 +15,9 @@ export default defineConfig({
   },
   output: 'server',
   adapter: netlify(),
+  image: {
+    domains: ['images.ctfassets.net'], // Allow images from Contentful
+    remotePatterns: [{ protocol: "https" }]
+  },
 });
 
