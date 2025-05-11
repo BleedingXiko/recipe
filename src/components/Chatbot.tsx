@@ -18,20 +18,9 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   
   const chatButtonRef = useRef<HTMLDivElement>(null);
   const chatWidgetRef = useRef<HTMLDivElement>(null);
-
-  // Initialize position on client-side only to prevent SSR errors
-  useEffect(() => {
-    setPosition({ 
-      x: typeof window !== 'undefined' ? window.innerWidth - 100 : 0, 
-      y: typeof window !== 'undefined' ? window.innerHeight - 100 : 0 
-    });
-  }, []);
 
   // Set welcome message on first open
   useEffect(() => {
@@ -48,70 +37,6 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
       ]);
     }
   }, [isOpen, messages.length, recipe.title]);
-
-  // Handle dragging - only add event listeners on client side
-  useEffect(() => {
-    if (typeof window === 'undefined') return; // Skip during SSR
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      if (isDragging && !isOpen) {
-        const newX = e.clientX - dragOffset.x;
-        const newY = e.clientY - dragOffset.y;
-        
-        // Ensure the button stays within viewport
-        const buttonSize = chatButtonRef.current?.getBoundingClientRect() || { width: 48, height: 48 };
-        const maxX = window.innerWidth - buttonSize.width;
-        const maxY = window.innerHeight - buttonSize.height;
-        
-        setPosition({
-          x: Math.max(0, Math.min(newX, maxX)),
-          y: Math.max(0, Math.min(newY, maxY))
-        });
-      }
-    };
-
-    const handleMouseUp = () => {
-      setIsDragging(false);
-    };
-
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('touchmove', handleMouseMove as any);
-      document.addEventListener('touchend', handleMouseUp);
-    }
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchmove', handleMouseMove as any);
-      document.removeEventListener('touchend', handleMouseUp);
-    };
-  }, [isDragging, dragOffset, isOpen]);
-
-  const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
-    if (isOpen) return;
-    
-    e.preventDefault();
-    
-    const clientX = 'touches' in e 
-      ? e.touches[0].clientX 
-      : (e as React.MouseEvent).clientX;
-    
-    const clientY = 'touches' in e 
-      ? e.touches[0].clientY 
-      : (e as React.MouseEvent).clientY;
-      
-    const rect = chatButtonRef.current?.getBoundingClientRect();
-    
-    if (rect) {
-      setDragOffset({
-        x: clientX - rect.left,
-        y: clientY - rect.top
-      });
-      setIsDragging(true);
-    }
-  };
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -169,18 +94,8 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
     return (
       <div 
         ref={chatButtonRef}
-        className="chat-button fixed bottom-6 right-6 w-12 h-12 sm:w-14 sm:h-14 bg-accent rounded-full shadow-lg flex items-center justify-center hover:opacity-90 transition-colors z-50 cursor-grab"
-        style={isDragging ? { 
-          position: 'fixed', 
-          top: `${position.y}px`, 
-          left: `${position.x}px`,
-          right: 'auto',
-          bottom: 'auto',
-          cursor: 'grabbing'
-        } : {}}
+        className="chat-button fixed bottom-6 right-6 w-12 h-12 sm:w-14 sm:h-14 bg-accent rounded-full shadow-lg flex items-center justify-center hover:opacity-90 transition-colors z-50 cursor-pointer"
         onClick={() => setIsOpen(true)}
-        onMouseDown={handleDragStart}
-        onTouchStart={handleDragStart}
       >
         <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
@@ -219,8 +134,6 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
             onClick={(e) => {
               e.stopPropagation();
               setIsOpen(false);
-              // Move the button up a bit when closing
-              setPosition(prev => ({ ...prev, y: Math.max(0, prev.y - 60) }));
             }}
             className="hover:opacity-80 transition-colors p-1"
           >
