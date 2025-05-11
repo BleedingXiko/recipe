@@ -17,7 +17,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: window.innerWidth - 100, y: window.innerHeight - 100 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   
@@ -153,24 +153,20 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
     }
     setIsLoading(false);
   };
-  
-  // Position styling for the chat button
-  const buttonStyle = {
-    transform: isOpen ? 'none' : `translate(${position.x}px, ${position.y}px)`,
-    transition: isDragging ? 'none' : 'transform 0.3s ease',
-    cursor: isDragging ? 'grabbing' : (isOpen ? 'pointer' : 'grab'),
-    right: isOpen ? '24px' : 'auto',
-    bottom: isOpen ? '24px' : 'auto',
-    position: 'fixed' as const,
-    zIndex: 50,
-  };
 
   if (!isOpen) {
     return (
       <div 
         ref={chatButtonRef}
-        className="chat-button w-12 h-12 sm:w-14 sm:h-14 bg-accent rounded-full shadow-lg flex items-center justify-center hover:opacity-90 transition-colors"
-        style={buttonStyle}
+        className="chat-button fixed bottom-6 right-6 w-12 h-12 sm:w-14 sm:h-14 bg-accent rounded-full shadow-lg flex items-center justify-center hover:opacity-90 transition-colors z-50 cursor-grab"
+        style={isDragging ? { 
+          position: 'fixed', 
+          top: `${position.y}px`, 
+          left: `${position.x}px`,
+          right: 'auto',
+          bottom: 'auto',
+          cursor: 'grabbing'
+        } : {}}
         onClick={() => setIsOpen(true)}
         onMouseDown={handleDragStart}
         onTouchStart={handleDragStart}
