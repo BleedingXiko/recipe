@@ -15,7 +15,7 @@ const { title } = Astro.props;
 <html lang="en" data-theme="dark">
 	<head>
 		<meta charset="UTF-8" />
-  <meta name="google-site-verification" content="hTAxf8xn8eXXFpP0e54DdavCQGuhwOW7w21wbrIDah4" />
+		<meta name="google-site-verification" content="hTAxf8xn8eXXFpP0e54DdavCQGuhwOW7w21wbrIDah4" />
 		<meta name="description" content="Catch up on some of my favorite recipes!" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -40,12 +40,13 @@ const { title } = Astro.props;
 	const theme = isDarkMode === 'dark' ? 'dark' : 'light';
 
 	// Put dark class on html tag to enable dark mode
-	document.querySelector("html").setAttribute("data-theme", theme);
-
-  </script>
+	const htmlElement = document.querySelector("html");
+	if (htmlElement) {
+		htmlElement.setAttribute("data-theme", theme);
+	}
+</script>
 
 <style is:global>
-
 :root[data-theme="light"] {
   --text: #01060a;
   --background: #e7f4fd;
@@ -53,6 +54,7 @@ const { title } = Astro.props;
   --secondary: #cfe9fc;
   --accent: #0f92f0;
 }
+
 :root[data-theme="dark"] {
   --text: #f6fafe;
   --background: #020f18;
@@ -61,25 +63,89 @@ const { title } = Astro.props;
   --accent: #0f92f0;
 }
 
-
-h1{
-    text-align: center;
-    font-size: 3rem;
-    padding-bottom: 20px;
-  }
-h2{
-	text-align: center;
-    font-size: 2rem;
-    padding-bottom: 20px;
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-
-
-
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  scroll-behavior: smooth;
+}
 
 body {
-	background-color: var(--background);
-	color: var(--text);
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Typography */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Responsive typography */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3rem;
+    padding-bottom: 1.25rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Container styles */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
 </style>

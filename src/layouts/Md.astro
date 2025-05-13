@@ -189,6 +189,38 @@ const {frontmatter} = Astro.props;
             width: 2rem;
         }
     }
+
+    /* Tap indicator for recipe steps */
+    .tap-indicator {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text);
+        opacity: 0.7;
+    }
+    
+    .recipe-content ol li:hover .tap-indicator,
+    .recipe-content ol li:active .tap-indicator {
+        opacity: 1;
+    }
+    
+    .recipe-content ol li.completed .tap-indicator {
+        color: var(--accent);
+        opacity: 1;
+    }
+    
+    /* Add touch feedback for mobile */
+    @media (hover: none) {
+        .recipe-content ol li:active {
+            opacity: 0.8;
+        }
+    }
 </style>
 
 <script>
@@ -198,8 +230,26 @@ const {frontmatter} = Astro.props;
         
         // Add click handler to toggle completed state
         instructionItems.forEach((item) => {
+            // Add a tap indicator
+            if (!item.querySelector('.tap-indicator')) {
+                const tapIndicator = document.createElement('div');
+                tapIndicator.className = 'tap-indicator';
+                tapIndicator.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8M12 16V8"/></svg>';
+                item.appendChild(tapIndicator);
+            }
+            
             item.addEventListener('click', () => {
                 item.classList.toggle('completed');
+                
+                // Update tap indicator when completed
+                const tapIndicator = item.querySelector('.tap-indicator');
+                if (tapIndicator) {
+                    if (item.classList.contains('completed')) {
+                        tapIndicator.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>';
+                    } else {
+                        tapIndicator.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8M12 16V8"/></svg>';
+                    }
+                }
             });
         });
     }
@@ -207,6 +257,6 @@ const {frontmatter} = Astro.props;
     // Run on initial page load
     document.addEventListener('DOMContentLoaded', initializeInstructionHandlers);
     
-    // Run after Astro page transitions (for client-side navigation)
-    document.addEventListener('astro:page-load', initializeInstructionHandlers);
+    // Run after Astro page transitions
+    document.addEventListener('astro:after-swap', initializeInstructionHandlers);
 </script>
