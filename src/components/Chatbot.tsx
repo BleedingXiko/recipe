@@ -12,6 +12,27 @@ interface ChatbotProps {
   apiKey: string; 
 }
 
+// Helper function to format text with markdown-like syntax
+const formatMessage = (text: string): string => {
+  // Bold text
+  let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+  // Italic text
+  formattedText = formattedText.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  
+  // Lists
+  formattedText = formattedText.replace(/^\s*-\s+(.*?)$/gm, '<li>$1</li>');
+  formattedText = formattedText.replace(/<li>(.*?)<\/li>/gs, '<ul>$&</ul>');
+  
+  // Line breaks
+  formattedText = formattedText.replace(/\n/g, '<br />');
+  
+  // Fix duplicate ul tags from multi-line lists
+  formattedText = formattedText.replace(/<\/ul>\s*<ul>/g, '');
+  
+  return formattedText;
+};
+
 const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -171,8 +192,8 @@ Match your response length to the complexity of the question. Simple questions d
                       ? 'ml-auto user-message'
                       : 'assistant-message'
                   }`}
+                  dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
                 >
-                  {message.content}
                 </div>
               ))}
             {isLoading && (
