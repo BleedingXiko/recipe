@@ -69,7 +69,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'qwen/qwen3-14b:free',
+          model: 'qwen/qwen3-30b-a3b:free',
           messages: apiMessages,
         }),
       });
