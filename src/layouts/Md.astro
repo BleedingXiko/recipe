@@ -209,4 +209,5 @@ const {frontmatter} = Astro.props;
     
     // Run after Astro page transitions (for client-side navigation)
     document.addEventListener('astro:page-load', initializeInstructionHandlers);
+    document.addEventListener('astro:after-swap', initializeInstructionHandlers);
 </script>
