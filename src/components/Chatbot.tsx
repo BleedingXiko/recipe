@@ -69,7 +69,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'tngtech/deepseek-r1t-chimera:free',
+          model: 'google/gemini-2.0-flash-exp:free',
           messages: apiMessages,
         }),
       });
