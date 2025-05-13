@@ -69,7 +69,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'deepseek/deepseek-v3-base:free',
+          model: 'deepseek/deepseek-chat-v3-0324:free',
           messages: apiMessages,
         }),
       });
