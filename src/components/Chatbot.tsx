@@ -28,11 +28,11 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
       setMessages([
         {
           role: 'system',
-          content: `You are a helpful recipe assistant for the recipe "${recipe.title}". Use the provided recipe details to answer questions accurately.`
+          content: `You are an expert culinary assistant for the recipe "${recipe.title}". Provide accurate guidance but be concise. Answer simple questions directly without unnecessary explanations. Only provide detailed information when specifically asked. Be friendly and helpful.`
         },
         {
           role: 'assistant',
-          content: `Hi there! I'm your recipe assistant for "${recipe.title}". Ask me any questions about ingredients, substitutions, or cooking steps!`
+          content: `Hi! I'm your recipe assistant for "${recipe.title}". Ask me anything about this recipe!`
         }
       ]);
     }
@@ -54,10 +54,19 @@ const Chatbot: React.FC<ChatbotProps> = ({ apiKey, recipe }) => {
       const apiMessages = [
         {
           role: 'system',
-          content: `You are a helpful recipe assistant for "${recipe.title}". Here is the recipe context:
-          ${recipe.content}
+          content: `You are an expert culinary assistant for "${recipe.title}". 
           
-          Answer the user's questions about this recipe using the provided context.`
+Recipe context:
+${recipe.content}
+
+Important guidelines:
+1. Be concise - give direct answers to simple questions
+2. Provide details ONLY when specifically requested
+3. Base all answers strictly on the recipe context
+4. For substitutions or modifications, give practical options briefly
+5. Avoid lengthy explanations unless the user explicitly asks for them
+
+Match your response length to the complexity of the question. Simple questions deserve simple answers.`
         },
         ...conversationMessages,
         { role: 'user', content: input }
