@@ -196,8 +196,16 @@ const {frontmatter} = Astro.props;
     function initializeInstructionHandlers() {
         const instructionItems = document.querySelectorAll('.recipe-content ol li');
         
-        // Add click handler to toggle completed state
+        // First remove any existing click handlers to prevent duplicates
         instructionItems.forEach((item) => {
+            const newItem = item.cloneNode(true);
+            if (item.parentNode) {
+                item.parentNode.replaceChild(newItem, item);
+            }
+        });
+        
+        // Then add fresh click handlers
+        document.querySelectorAll('.recipe-content ol li').forEach((item) => {
             item.addEventListener('click', () => {
                 item.classList.toggle('completed');
             });
